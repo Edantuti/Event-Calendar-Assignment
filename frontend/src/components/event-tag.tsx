@@ -24,20 +24,20 @@ export function EventTag({ id }: { id: string; title?: string }) {
     <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-4">
       <div className="flex items-start justify-between">
         <h2 className="text-lg font-semibold text-gray-900">{event!.title}</h2>
-        <div>
+        <div className="flex">
           <button
             onClick={() => handleEditClick()}
             className="px-4 py-2 text-blue-500 rounded"
             title="Edit Event"
           >
-            <SquarePen />
+            <SquarePen className="size-4" />
           </button>
           <button
             onClick={() => handleClick()}
             className="px-4 py-2 text-blue-500 rounded"
             title="View Event"
           >
-            <CircleArrowOutUpRight />
+            <CircleArrowOutUpRight className="size-4" />
           </button>
         </div>
       </div>
