@@ -48,6 +48,9 @@ cd event-calendar-assignment
     POSTGRES_USER=sam_sepi0l
     POSTGRES_DB=sd
     POSTGRES_PASSWORD=1234567
+    PASSWORD_HASH=testing
+    TOKEN_HASH=testing
+    PORT=5000
     DEV=false
     ```
 
