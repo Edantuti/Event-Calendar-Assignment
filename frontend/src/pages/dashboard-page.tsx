@@ -1,13 +1,14 @@
 import { useCalendar } from "../hooks/calendar-hook";
-import { Calendar } from "../components/calendar";
+import { CalendarView } from "../components/calendar";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useEffect, KeyboardEvent } from "react";
+import { useEffect } from "react";
 import { NavBar } from "../components/nav-bar";
 import { useEvents } from "../hooks/events-hook";
 import { EventCreateCard } from "../components/event-create-card";
 import { EventEditCard } from "../components/event-edit-card";
 import { axiosInstance } from "../utils/axios-instance";
 import { EventDisplayCard } from "../components/event-display-card";
+import { WeekView } from "../components/week";
 
 const MONTHS = [
   "Jan",
@@ -26,7 +27,7 @@ const MONTHS = [
 
 export function DashboardPage() {
   const [searchParams] = useSearchParams();
-  const { dateValue, changeDate, changeMonths } = useCalendar();
+  const { calendarView, dateValue, changeDate } = useCalendar();
   const {
     eventDisplayModal,
     eventCreateModal,
@@ -34,14 +35,6 @@ export function DashboardPage() {
     setEventsData,
   } = useEvents();
   const navigate = useNavigate();
-  function handleKeyDown(event: KeyboardEvent<HTMLElement>) {
-    if (event.key === "ArrowLeft") {
-      changeMonths(-1);
-    }
-    if (event.key === "ArrowRight") {
-      changeMonths(1);
-    }
-  }
   useEffect(() => {
     const monthIndex = searchParams.get("month")
       ? MONTHS.findIndex((value) => value === searchParams.get("month"))
@@ -73,12 +66,10 @@ export function DashboardPage() {
       });
   }
   return (
-    <section
-      className="grid grid-cols-[24rem_auto] min-h-screen"
-      onKeyDown={(event) => handleKeyDown(event)}
-    >
+    <section className="grid grid-cols-[24rem_auto] min-h-screen">
       <NavBar />
-      <Calendar currentDate={dateValue} />
+      {calendarView && <CalendarView currentDate={dateValue} />}
+      {!calendarView && <WeekView currentDate={dateValue} />}
       {eventCreateModal && <EventCreateCard />}
       {eventModifyModal && <EventEditCard />}
       {eventDisplayModal && <EventDisplayCard />}

@@ -1,4 +1,4 @@
-import { getMonth, getYear } from "date-fns";
+import { getMonth, getWeekOfMonth, getYear } from "date-fns";
 import { useCalendar } from "../hooks/calendar-hook";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { KeyboardEvent } from "react";
@@ -18,28 +18,29 @@ const MONTHS = [
   "Dec",
 ];
 
-export function Header() {
-  const { dateValue, changeMonths, changeView } = useCalendar();
+export function HeaderWeek() {
+  const { dateValue, changeWeek, changeView } = useCalendar();
   function handleKeyDown(event: KeyboardEvent<HTMLElement>) {
     if (event.key === "ArrowLeft") {
-      changeMonths(-1);
+      changeWeek(-1);
     }
     if (event.key === "ArrowRight") {
-      changeMonths(1);
+      changeWeek(1);
     }
   }
   function handleClick(direction: -1 | 1) {
-    changeMonths(direction);
+    changeWeek(direction);
   }
   return (
     <div className="h-20 flex justify-between items-center px-10 border-b bg-white">
       <div className="text-xl font-semibold flex gap-2 items-center">
         <p>
-          {MONTHS[getMonth(dateValue)]}, {getYear(dateValue)}
+          Week {getWeekOfMonth(dateValue)},{MONTHS[getMonth(dateValue)]},{" "}
+          {getYear(dateValue)}
         </p>
         <button
           className="px-8 py-2 rounded-full"
-          onClick={() => changeView(false)}
+          onClick={() => changeView(true)}
         >
           Change View
         </button>

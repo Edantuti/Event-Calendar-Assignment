@@ -14,7 +14,7 @@ import { useEvents } from "../hooks/events-hook";
 import { useSearchParams } from "react-router-dom";
 import { Day } from "./day-card";
 
-export function Calendar({ currentDate }: { currentDate: Date }) {
+export function CalendarView({ currentDate }: { currentDate: Date }) {
   const { events, toggleEventModify } = useEvents();
   const [, setSearchParams] = useSearchParams();
   const currentMonth: number = getMonth(currentDate);
