@@ -1,13 +1,10 @@
 import { useSearchParams } from "react-router-dom";
 import { useEvents } from "../hooks/events-hook";
 import {
-  addMonths,
   format,
   isSameMonth,
-  isSameWeek,
   lastDayOfMonth,
   lastDayOfWeek,
-  startOfMonth,
   startOfWeek,
 } from "date-fns";
 import { HeaderWeek } from "./header-week";
@@ -17,7 +14,6 @@ import { DayWeek } from "./day-card";
 export function WeekView({ currentDate }: { currentDate: Date }) {
   const { events, toggleEventModify } = useEvents();
   const [, setSearchParams] = useSearchParams();
-  const firstDateMonth = startOfMonth(currentDate);
   const lastDateMonth = lastDayOfMonth(currentDate);
   const firstDate = startOfWeek(currentDate);
   const lastDate = lastDayOfWeek(currentDate);
@@ -99,81 +95,6 @@ export function WeekView({ currentDate }: { currentDate: Date }) {
       );
     }
   }
-  // if (
-  //   isSameWeek(firstDate, firstDateMonth) &&
-  //   isSameWeek(lastDate, firstDateMonth)
-  // ) {
-  //   const previousDayscount = firstDateMonth.getDay();
-  //   let day = firstDate.getDate();
-  //   for (let i = 0; i < previousDayscount; i++) {
-  //     previousWeekDays.push(
-  //       <DayWeek
-  //         date={day++}
-  //         month={firstDate.getMonth()}
-  //         year={firstDate.getFullYear()}
-  //         findEvents={findEvents}
-  //       />,
-  //     );
-  //   }
-  //   day = 1;
-
-  //   // const temp = addMonths(currentDate, 1);
-  //   const temp = currentDate;
-  //   for (let i = previousDayscount; i < 7; i++) {
-  //     days.push(
-  //       <DayWeek
-  //         date={day++}
-  //         month={temp.getMonth()}
-  //         year={temp.getFullYear()}
-  //         findEvents={findEvents}
-  //         empty={false}
-  //       />,
-  //     );
-  //   }
-  // } else if (
-  //   isSameWeek(firstDate, currentDate) &&
-  //   isSameWeek(lastDate, currentDate)
-  // ) {
-  //   const nextDaysCount = lastDate.getDay();
-  //   console.log(lastDateMonth);
-  //   let day = firstDate.getDate();
-  //   for (let i = 0; i < nextDaysCount; i++) {
-  //     days.push(
-  //       <DayWeek
-  //         date={day++}
-  //         month={firstDate.getMonth()}
-  //         year={firstDate.getFullYear()}
-  //         findEvents={findEvents}
-  //         empty={false}
-  //       />,
-  //     );
-  //   }
-  //   day = 1;
-  //   const temp = addMonths(lastDateMonth, 1);
-  //   for (let i = nextDaysCount; i < 7; i++) {
-  //     nextWeekDays.push(
-  //       <DayWeek
-  //         date={day++}
-  //         month={temp.getMonth()}
-  //         year={temp.getFullYear()}
-  //         findEvents={findEvents}
-  //       />,
-  //     );
-  //   }
-  // } else {
-  //   let day = firstDate.getDate();
-  //   for (let i = 0; i < 7; i++) {
-  //     days.push(
-  //       <DayWeek
-  //         date={day++}
-  //         month={firstDate.getMonth()}
-  //         year={firstDate.getFullYear()}
-  //         findEvents={findEvents}
-  //         empty={false}
-  //       />,
-  //     );
-  //   }
-  // }
   function findEvents(date: number, month: number, year: number) {
     const dateValue = new Date(year, month, date);
     const currentEvents = events.filter(
