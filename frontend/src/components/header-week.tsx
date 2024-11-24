@@ -46,10 +46,10 @@ export function HeaderWeek() {
         </button>
       </div>
       <div className="flex gap-1" onKeyDown={(event) => handleKeyDown(event)}>
-        <button onClick={() => handleClick(-1)}>
+        <button onClick={() => handleClick(-1)} aria-label="previous week">
           <ChevronLeft className="p-2 rounded-full bg-gray-100 text-center size-10" />
         </button>
-        <button onClick={() => handleClick(1)}>
+        <button onClick={() => handleClick(1)} aria-label="next week">
           <ChevronRight className="p-2 rounded-full bg-gray-100 text-center size-10" />
         </button>
       </div>

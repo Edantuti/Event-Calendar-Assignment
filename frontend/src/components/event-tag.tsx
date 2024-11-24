@@ -21,9 +21,9 @@ export function EventTag({ id }: { id: string; title?: string }) {
     toggleEventModify();
   }
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-4">
+    <li className="bg-white rounded-lg shadow-sm border border-gray-100 p-4">
       <div className="flex items-start justify-between">
-        <h2 className="text-lg font-semibold text-gray-900">{event!.title}</h2>
+        <h4 className="text-lg font-semibold text-gray-900">{event!.title}</h4>
         <div className="flex">
           <button
             onClick={() => handleEditClick()}
@@ -51,6 +51,6 @@ export function EventTag({ id }: { id: string; title?: string }) {
           {format(event!.dateTime, "h:mm a")}
         </div>
       </div>
-    </div>
+    </li>
   );
 }
